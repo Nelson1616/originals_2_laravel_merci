@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AuthorController;
+use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +24,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('admins', AdminController::class);
 Route::prefix('admins')->group(function () {
+   
+});
+
+Route::resource('categories', CategoryController::class);
+Route::prefix('categories')->group(function () {
+   
+});
+
+Route::resource('authors', AuthorController::class);
+Route::prefix('authors')->group(function () {
+   
+});
+
+Route::resource('books', BookController::class);
+Route::prefix('books')->group(function () {
    
 });
