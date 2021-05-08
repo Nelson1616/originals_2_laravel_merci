@@ -89,6 +89,8 @@ class BookController extends Controller
             {
                 return response()->json(['data' => ['msg' => 'Livro não encontrado']],);
             }
+            $book->categories;
+            $book->author;
             return response()->json(['data' => $book, 200,],);
         }
         catch(\Exception $e)

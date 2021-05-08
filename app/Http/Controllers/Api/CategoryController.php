@@ -81,6 +81,7 @@ class CategoryController extends Controller
             {
                 return response()->json(['data' => ['msg' => 'Categoria não encontrada']],);
             }
+            $category->books;
             return response()->json(['data' => $category, 200,],);
         }
         catch(\Exception $e)

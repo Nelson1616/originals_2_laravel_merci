@@ -77,6 +77,7 @@ class AuthorController extends Controller
         try
         {
             $author = $this->author->find($id);
+            $author->books;
             if(!$author)
             {
                 return response()->json(['data' => ['msg' => 'Autor não encontrado']],);
