@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\Auth\LoginJWTController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\CategoryController;
@@ -23,27 +24,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('admins', AdminController::class);
-Route::prefix('admins')->group(function () {
-   
+Route::middleware('jwt.auth')->group(function () {
+    Route::resource('admins', AdminController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('authors', AuthorController::class);
+    Route::resource('books', BookController::class);
 });
 
-Route::resource('users', UserController::class);
-Route::prefix('users')->group(function () {
-   
-});
-
-Route::resource('categories', CategoryController::class);
-Route::prefix('categories')->group(function () {
-   
-});
-
-Route::resource('authors', AuthorController::class);
-Route::prefix('authors')->group(function () {
-   
-});
-
-Route::resource('books', BookController::class);
-Route::prefix('books')->group(function () {
-   
-});
+Route::post('loginAdmin', [LoginJWTController::class, 'loginAdmin'])->name('loginAdmin');
+Route::get('logoutAdmin', [LoginJWTController::class, 'logoutAdmin'])->name('logoutAdmin');
+Route::get('refreshAdmin', [LoginJWTController::class, 'refreshAdmin'])->name('refreshAdmin');
