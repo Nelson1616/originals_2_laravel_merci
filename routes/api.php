@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\Auth\LoginJWTController;
 use App\Http\Controllers\Api\AuthorController;
 use App\Http\Controllers\Api\BookController;
+use App\Http\Controllers\Api\BookImageController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -25,12 +26,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('jwt.auth')->group(function () {
+    
+});
+
     Route::resource('admins', AdminController::class);
     Route::resource('users', UserController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('authors', AuthorController::class);
     Route::resource('books', BookController::class);
-});
+    Route::resource('bookimages', BookImageController::class);
 
 Route::post('loginAdmin', [LoginJWTController::class, 'loginAdmin'])->name('loginAdmin');
 Route::get('logoutAdmin', [LoginJWTController::class, 'logoutAdmin'])->name('logoutAdmin');

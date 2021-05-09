@@ -31,6 +31,23 @@ class BookController extends Controller
             {
                 $book->categories()->sync($data['categories']);
             }
+            $photos = $request->file('photos');
+            $thumb = $request->file('thumb');
+            if($thumb)
+            {
+                $photosuploaded = [];
+                $pathThumb = $thumb->store('images', 'public');
+                array_push($photosuploaded, ['photo' => $pathThumb, 'is_thumb' => true]);
+                if($photos)
+                {
+                    foreach($photos as $photo)
+                    {
+                        $path = $photo->store('images', 'public');
+                        array_push($photosuploaded, ['photo' => $path, 'is_thumb' => false]);
+                    }
+                }
+                $book->photos()->createMany($photosuploaded);
+            }
             return response()->json(['data' => ['msg' => 'Livro cadastrado com sucesso!'], 200,],);
         }
         catch(\Exception $e)
@@ -91,6 +108,7 @@ class BookController extends Controller
             }
             $book->categories;
             $book->author;
+            $book->photos;
             return response()->json(['data' => $book, 200,],);
         }
         catch(\Exception $e)
