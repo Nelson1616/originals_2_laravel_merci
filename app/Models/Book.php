@@ -29,4 +29,9 @@ class Book extends Model
     {
         return $this->belongsTo(Author::class);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(BookImage::class);
+    }
 }
