@@ -35,3 +35,4 @@ Route::middleware('jwt.auth')->group(function () {
 Route::post('loginAdmin', [LoginJWTController::class, 'loginAdmin'])->name('loginAdmin');
 Route::get('logoutAdmin', [LoginJWTController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('refreshAdmin', [LoginJWTController::class, 'refreshAdmin'])->name('refreshAdmin');
+Route::get('currentAdmin', [LoginJWTController::class, 'currentAdmin'])->name('currentAdmin');

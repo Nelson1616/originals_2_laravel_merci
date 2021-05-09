@@ -39,4 +39,11 @@ class LoginJWTController extends Controller
         ]);
 
     }
+
+    public function currentAdmin()
+    {
+        return response()->json([
+            'admin' => JWTAuth::toUser(JWTAuth::getToken()),
+        ]);
+    }
 }
