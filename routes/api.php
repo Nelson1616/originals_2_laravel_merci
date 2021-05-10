@@ -26,15 +26,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('jwt.auth')->group(function () {
-    
+       
 });
 
-    Route::resource('admins', AdminController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('authors', AuthorController::class);
-    Route::resource('books', BookController::class);
-    Route::resource('bookimages', BookImageController::class);
+Route::resource('admins', AdminController::class);
+Route::resource('users', UserController::class);
+Route::resource('categories', CategoryController::class);
+Route::resource('authors', AuthorController::class);
+Route::resource('books', BookController::class);
+Route::resource('bookimages', BookImageController::class); 
+
+
 
 Route::post('loginAdmin', [LoginJWTController::class, 'loginAdmin'])->name('loginAdmin');
 Route::get('logoutAdmin', [LoginJWTController::class, 'logoutAdmin'])->name('logoutAdmin');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -87,6 +88,14 @@ class BookController extends Controller
             if(!$book)
             {
                 return response()->json(['data' => ['msg' => 'Livro não encontrado']],);
+            }
+            $photos = $book->photos;
+            if($photos)
+            {
+                foreach($photos as $photo)
+                {
+                    Storage::disk('public')->delete($photo->photo);
+                }
             }
             $book->delete();        
             return response()->json(['data' => ['msg' => 'Livro apagado com sucesso!'], 200,],);
